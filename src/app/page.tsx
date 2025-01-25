@@ -6,16 +6,15 @@ import Laptop from "./components/laptopBanner/index";
 
 export default function Home() {
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 590);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setIsMobile(window.innerWidth <= 590);
-
       const handleResize = () => {
         setIsMobile(window.innerWidth <= 590);
       };
 
+      handleResize(); 
       window.addEventListener('resize', handleResize);
       return () => {
         window.removeEventListener('resize', handleResize);
