@@ -9,14 +9,18 @@ export default function Home() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 590);
 
   useEffect(() => {
-    const handleResize = () => {
+    if (typeof window !== 'undefined') {
       setIsMobile(window.innerWidth <= 590);
-    };
 
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+      const handleResize = () => {
+        setIsMobile(window.innerWidth <= 590);
+      };
+
+      window.addEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }
   }, []);
 
   useEffect(() => {
