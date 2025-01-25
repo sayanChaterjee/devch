@@ -1,63 +1,43 @@
+'use client'
+
+import { useEffect, useState } from "react";
+import Mobile from "./components/banner/index";
+import Laptop from "./components/laptopBanner/index";
+
 export default function Home() {
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 590);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 590);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    import('./statics/main.js').then(module => {
+    }).catch(err => console.error("Failed to load main.js", err));
+  }, []);
+
   return (
     <>
       <a href="" className="clear"></a>
       <p className="hello-txt">
         <span>visitor</span>@devch.com:~$ welcome
       </p>
-      <div className="flex flex-row -space-x-10">
-      <div className="art -space-y-4 banner-txt">
-        <div>       __________</div>
-        <div>      /  _____   \</div>
-        <div>     /  /     /  /</div>
-        <div>    /  /     /  /</div>
-        <div>   /  /     /  /</div>
-        <div>  /  /     /  /</div>
-        <div> /  /_____/  /</div>
-        <div>/___________/</div>
-     </div>
-     <div className="art -space-y-4 banner-txt">
-        <div>       __________  </div>
-        <div>      /  _______/  </div>
-        <div>     /  /          </div>
-        <div>    /  /______     </div>
-        <div>   /  _______/     </div>
-        <div>  /  /             </div>
-        <div> /  /_______       </div>
-        <div>/__________/       </div>
-     </div>
-     <div className="art -space-y-4 space-x-2 banner-txt">
-        <div>  ___       __  </div>
-        <div> |  |     /  / </div>
-        <div> |  |    /  / </div>
-        <div> |  |   /  / </div>
-        <div> |  |  /  / </div>
-        <div> |  | /  / </div>
-        <div> |  |/  / </div>
-        <div> |_____/ </div>
-      
-     </div>
-     <div className="art -space-y-4 -space-x-3 banner-txt">
-        <div>      ________ </div>
-        <div>      /  _____/</div>
-        <div>     /  /      </div>
-        <div>    /  /      </div>
-        <div>   /  /      </div>
-        <div>  /  /      </div>
-        <div> /  /_____ </div>
-        <div>/________/ </div>
-     </div>
-     <div className="art -space-y-4 -space-x-4 banner-txt">
-        <div>       __       __ </div>
-        <div>       /  /     /  /</div>
-        <div>      /  /     /  /</div>
-        <div>     /  /____ /  /</div>
-        <div>    /  _____    /  </div>
-        <div>   /  /     /  /</div>
-        <div>  /  /     /  /</div>
-        <div> /__/     /__/</div>
-     </div>
-     </div>
+      <div>
+        {isMobile ? (
+          <Mobile/>
+        ) : (
+          <Laptop/>
+        )}
+      </div>
       <div className="txt">
         <p className="welcome-txt">
           Welcome to my terminal like portfolio . <br />
